@@ -1,0 +1,2521 @@
+﻿TÀI LIỆU GIẢ LẬP CHO TRAINING RAG — KHÔNG PHẢI QUY ĐỊNH CÔNG TY
+Mã tài liệu: DNC-DEMO. Phiên bản: DEMO-v2.
+Toàn bộ khách hàng và cuộc gọi đều là dữ liệu giả lập.
+
+1. Định nghĩa và phạm vi
+DNC_CALLS là số dòng cuộc gọi có RESULT = 'DNC'.
+DNC_CUSTOMERS là số CUSTOMER_ID khác nhau có ít nhất một cuộc gọi DNC.
+Một khách hàng có nhiều cuộc gọi DNC vẫn chỉ tính là một khách hàng DNC.
+TOTAL_CALLS đếm toàn bộ cuộc gọi, gồm cả DNC và OTHER.
+TOTAL_CUSTOMERS đếm toàn bộ khách hàng khác nhau.
+Không có dữ liệu khách hàng thật, lãi suất, hạn mức hoặc chính sách bán hàng.
+
+2. Tổng hợp số liệu của toàn bộ tập dữ liệu
+Đây là bảng tổng hợp đã được Python tính từ toàn bộ dữ liệu.
+Không được dùng số dòng của một đoạn truy xuất để suy ra tổng toàn bộ tập.
+CHI_SO | GIA_TRI | DON_VI
+TOTAL_CALLS | 1000 | cuộc gọi
+TOTAL_CUSTOMERS | 300 | khách hàng
+DNC_CALLS | 396 | cuộc gọi
+DNC_CUSTOMERS | 219 | khách hàng
+OTHER_CALLS | 604 | cuộc gọi
+
+3. Khách hàng KH001
+CUSTOMER_ID = KH001.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL01 | KH001 | DNC
+CALL02 | KH001 | DNC
+CALL337 | KH001 | OTHER
+CALL350 | KH001 | DNC
+CALL547 | KH001 | OTHER
+CALL903 | KH001 | OTHER
+
+4. Khách hàng KH002
+CUSTOMER_ID = KH002.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL03 | KH002 | DNC
+CALL510 | KH002 | OTHER
+CALL573 | KH002 | DNC
+CALL695 | KH002 | DNC
+
+5. Khách hàng KH003
+CUSTOMER_ID = KH003.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL04 | KH003 | OTHER
+CALL367 | KH003 | OTHER
+CALL891 | KH003 | OTHER
+
+6. Khách hàng KH004
+CUSTOMER_ID = KH004.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL05 | KH004 | OTHER
+CALL397 | KH004 | OTHER
+CALL777 | KH004 | OTHER
+
+7. Khách hàng KH005
+CUSTOMER_ID = KH005.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL06 | KH005 | DNC
+CALL302 | KH005 | DNC
+CALL618 | KH005 | OTHER
+
+8. Khách hàng KH006
+CUSTOMER_ID = KH006.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL07 | KH006 | DNC
+
+9. Khách hàng KH007
+CUSTOMER_ID = KH007.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL08 | KH007 | DNC
+CALL488 | KH007 | OTHER
+
+10. Khách hàng KH008
+CUSTOMER_ID = KH008.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL09 | KH008 | OTHER
+
+11. Khách hàng KH009
+CUSTOMER_ID = KH009.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL10 | KH009 | OTHER
+CALL466 | KH009 | DNC
+CALL702 | KH009 | DNC
+CALL900 | KH009 | OTHER
+CALL913 | KH009 | DNC
+
+12. Khách hàng KH010
+CUSTOMER_ID = KH010.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL11 | KH010 | OTHER
+CALL845 | KH010 | DNC
+CALL892 | KH010 | DNC
+
+13. Khách hàng KH011
+CUSTOMER_ID = KH011.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL12 | KH011 | DNC
+CALL395 | KH011 | OTHER
+CALL422 | KH011 | OTHER
+CALL530 | KH011 | OTHER
+CALL687 | KH011 | DNC
+
+14. Khách hàng KH012
+CUSTOMER_ID = KH012.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL13 | KH012 | OTHER
+
+15. Khách hàng KH013
+CUSTOMER_ID = KH013.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL14 | KH013 | DNC
+CALL315 | KH013 | DNC
+
+16. Khách hàng KH014
+CUSTOMER_ID = KH014.
+Khách hàng này có 6 cuộc gọi, gồm 5 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL15 | KH014 | DNC
+CALL408 | KH014 | DNC
+CALL528 | KH014 | DNC
+CALL699 | KH014 | DNC
+CALL963 | KH014 | OTHER
+CALL981 | KH014 | DNC
+
+17. Khách hàng KH015
+CUSTOMER_ID = KH015.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL16 | KH015 | OTHER
+CALL329 | KH015 | DNC
+CALL403 | KH015 | DNC
+
+18. Khách hàng KH016
+CUSTOMER_ID = KH016.
+Khách hàng này có 3 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL17 | KH016 | DNC
+CALL711 | KH016 | DNC
+CALL756 | KH016 | DNC
+
+19. Khách hàng KH017
+CUSTOMER_ID = KH017.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL18 | KH017 | DNC
+
+20. Khách hàng KH018
+CUSTOMER_ID = KH018.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL19 | KH018 | OTHER
+
+21. Khách hàng KH019
+CUSTOMER_ID = KH019.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL20 | KH019 | OTHER
+CALL587 | KH019 | DNC
+CALL599 | KH019 | OTHER
+CALL928 | KH019 | OTHER
+
+22. Khách hàng KH020
+CUSTOMER_ID = KH020.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL21 | KH020 | DNC
+CALL320 | KH020 | OTHER
+CALL668 | KH020 | DNC
+
+23. Khách hàng KH021
+CUSTOMER_ID = KH021.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL22 | KH021 | OTHER
+CALL307 | KH021 | OTHER
+CALL420 | KH021 | OTHER
+CALL526 | KH021 | OTHER
+CALL639 | KH021 | DNC
+
+24. Khách hàng KH022
+CUSTOMER_ID = KH022.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL23 | KH022 | OTHER
+CALL306 | KH022 | DNC
+CALL782 | KH022 | OTHER
+CALL819 | KH022 | OTHER
+CALL946 | KH022 | OTHER
+
+25. Khách hàng KH023
+CUSTOMER_ID = KH023.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL24 | KH023 | DNC
+CALL336 | KH023 | OTHER
+CALL709 | KH023 | OTHER
+CALL858 | KH023 | OTHER
+CALL911 | KH023 | OTHER
+
+26. Khách hàng KH024
+CUSTOMER_ID = KH024.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL25 | KH024 | OTHER
+CALL484 | KH024 | OTHER
+CALL606 | KH024 | DNC
+
+27. Khách hàng KH025
+CUSTOMER_ID = KH025.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL26 | KH025 | OTHER
+CALL930 | KH025 | OTHER
+
+28. Khách hàng KH026
+CUSTOMER_ID = KH026.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL27 | KH026 | DNC
+CALL632 | KH026 | OTHER
+CALL763 | KH026 | OTHER
+
+29. Khách hàng KH027
+CUSTOMER_ID = KH027.
+Khách hàng này có 8 cuộc gọi, gồm 5 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL28 | KH027 | DNC
+CALL491 | KH027 | DNC
+CALL552 | KH027 | DNC
+CALL703 | KH027 | DNC
+CALL740 | KH027 | OTHER
+CALL762 | KH027 | DNC
+CALL832 | KH027 | OTHER
+CALL871 | KH027 | OTHER
+
+30. Khách hàng KH028
+CUSTOMER_ID = KH028.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL29 | KH028 | OTHER
+CALL495 | KH028 | DNC
+CALL549 | KH028 | DNC
+
+31. Khách hàng KH029
+CUSTOMER_ID = KH029.
+Khách hàng này có 5 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL30 | KH029 | DNC
+CALL607 | KH029 | DNC
+CALL773 | KH029 | DNC
+CALL811 | KH029 | DNC
+CALL995 | KH029 | OTHER
+
+32. Khách hàng KH030
+CUSTOMER_ID = KH030.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL31 | KH030 | DNC
+CALL949 | KH030 | DNC
+
+33. Khách hàng KH031
+CUSTOMER_ID = KH031.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL32 | KH031 | DNC
+CALL504 | KH031 | OTHER
+
+34. Khách hàng KH032
+CUSTOMER_ID = KH032.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL33 | KH032 | OTHER
+CALL823 | KH032 | OTHER
+
+35. Khách hàng KH033
+CUSTOMER_ID = KH033.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL34 | KH033 | OTHER
+CALL390 | KH033 | OTHER
+CALL705 | KH033 | OTHER
+
+36. Khách hàng KH034
+CUSTOMER_ID = KH034.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL35 | KH034 | OTHER
+CALL493 | KH034 | OTHER
+CALL974 | KH034 | OTHER
+
+37. Khách hàng KH035
+CUSTOMER_ID = KH035.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL36 | KH035 | OTHER
+CALL809 | KH035 | OTHER
+CALL914 | KH035 | DNC
+CALL954 | KH035 | DNC
+
+38. Khách hàng KH036
+CUSTOMER_ID = KH036.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL37 | KH036 | OTHER
+CALL340 | KH036 | OTHER
+CALL419 | KH036 | OTHER
+
+39. Khách hàng KH037
+CUSTOMER_ID = KH037.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL38 | KH037 | OTHER
+
+40. Khách hàng KH038
+CUSTOMER_ID = KH038.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL39 | KH038 | DNC
+CALL363 | KH038 | OTHER
+CALL494 | KH038 | OTHER
+CALL812 | KH038 | DNC
+CALL988 | KH038 | DNC
+
+41. Khách hàng KH039
+CUSTOMER_ID = KH039.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL40 | KH039 | OTHER
+CALL802 | KH039 | DNC
+
+42. Khách hàng KH040
+CUSTOMER_ID = KH040.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL41 | KH040 | OTHER
+CALL384 | KH040 | OTHER
+CALL815 | KH040 | OTHER
+CALL959 | KH040 | OTHER
+
+43. Khách hàng KH041
+CUSTOMER_ID = KH041.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL42 | KH041 | OTHER
+CALL612 | KH041 | OTHER
+CALL939 | KH041 | OTHER
+CALL1000 | KH041 | DNC
+
+44. Khách hàng KH042
+CUSTOMER_ID = KH042.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL43 | KH042 | OTHER
+CALL387 | KH042 | DNC
+CALL416 | KH042 | OTHER
+CALL716 | KH042 | DNC
+
+45. Khách hàng KH043
+CUSTOMER_ID = KH043.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL44 | KH043 | OTHER
+CALL938 | KH043 | OTHER
+
+46. Khách hàng KH044
+CUSTOMER_ID = KH044.
+Khách hàng này có 7 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL45 | KH044 | OTHER
+CALL462 | KH044 | DNC
+CALL497 | KH044 | OTHER
+CALL733 | KH044 | DNC
+CALL825 | KH044 | OTHER
+CALL840 | KH044 | DNC
+CALL906 | KH044 | OTHER
+
+47. Khách hàng KH045
+CUSTOMER_ID = KH045.
+Khách hàng này có 3 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL46 | KH045 | DNC
+CALL452 | KH045 | DNC
+CALL984 | KH045 | DNC
+
+48. Khách hàng KH046
+CUSTOMER_ID = KH046.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL47 | KH046 | DNC
+CALL544 | KH046 | DNC
+
+49. Khách hàng KH047
+CUSTOMER_ID = KH047.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL48 | KH047 | DNC
+CALL602 | KH047 | OTHER
+CALL642 | KH047 | OTHER
+CALL816 | KH047 | OTHER
+
+50. Khách hàng KH048
+CUSTOMER_ID = KH048.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL49 | KH048 | DNC
+
+51. Khách hàng KH049
+CUSTOMER_ID = KH049.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL50 | KH049 | DNC
+CALL729 | KH049 | DNC
+CALL834 | KH049 | OTHER
+
+52. Khách hàng KH050
+CUSTOMER_ID = KH050.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL51 | KH050 | DNC
+CALL734 | KH050 | OTHER
+
+53. Khách hàng KH051
+CUSTOMER_ID = KH051.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL52 | KH051 | DNC
+CALL505 | KH051 | OTHER
+CALL603 | KH051 | OTHER
+CALL675 | KH051 | OTHER
+CALL723 | KH051 | OTHER
+
+54. Khách hàng KH052
+CUSTOMER_ID = KH052.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL53 | KH052 | OTHER
+CALL480 | KH052 | OTHER
+CALL604 | KH052 | OTHER
+CALL851 | KH052 | OTHER
+
+55. Khách hàng KH053
+CUSTOMER_ID = KH053.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL54 | KH053 | DNC
+CALL309 | KH053 | DNC
+CALL873 | KH053 | OTHER
+
+56. Khách hàng KH054
+CUSTOMER_ID = KH054.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL55 | KH054 | DNC
+CALL539 | KH054 | OTHER
+CALL915 | KH054 | OTHER
+
+57. Khách hàng KH055
+CUSTOMER_ID = KH055.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL56 | KH055 | DNC
+CALL368 | KH055 | OTHER
+CALL442 | KH055 | OTHER
+CALL791 | KH055 | DNC
+
+58. Khách hàng KH056
+CUSTOMER_ID = KH056.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL57 | KH056 | DNC
+CALL319 | KH056 | DNC
+CALL430 | KH056 | OTHER
+CALL707 | KH056 | OTHER
+
+59. Khách hàng KH057
+CUSTOMER_ID = KH057.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL58 | KH057 | OTHER
+CALL769 | KH057 | DNC
+
+60. Khách hàng KH058
+CUSTOMER_ID = KH058.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL59 | KH058 | OTHER
+
+61. Khách hàng KH059
+CUSTOMER_ID = KH059.
+Khách hàng này có 7 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL60 | KH059 | OTHER
+CALL424 | KH059 | OTHER
+CALL428 | KH059 | OTHER
+CALL560 | KH059 | OTHER
+CALL724 | KH059 | OTHER
+CALL768 | KH059 | DNC
+CALL796 | KH059 | OTHER
+
+62. Khách hàng KH060
+CUSTOMER_ID = KH060.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL61 | KH060 | DNC
+CALL667 | KH060 | DNC
+
+63. Khách hàng KH061
+CUSTOMER_ID = KH061.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL62 | KH061 | OTHER
+CALL498 | KH061 | OTHER
+CALL561 | KH061 | OTHER
+
+64. Khách hàng KH062
+CUSTOMER_ID = KH062.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL63 | KH062 | DNC
+CALL436 | KH062 | OTHER
+
+65. Khách hàng KH063
+CUSTOMER_ID = KH063.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL64 | KH063 | DNC
+CALL372 | KH063 | OTHER
+CALL684 | KH063 | OTHER
+CALL738 | KH063 | OTHER
+CALL896 | KH063 | DNC
+
+66. Khách hàng KH064
+CUSTOMER_ID = KH064.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL65 | KH064 | OTHER
+CALL342 | KH064 | OTHER
+
+67. Khách hàng KH065
+CUSTOMER_ID = KH065.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL66 | KH065 | OTHER
+CALL486 | KH065 | OTHER
+CALL689 | KH065 | OTHER
+
+68. Khách hàng KH066
+CUSTOMER_ID = KH066.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL67 | KH066 | OTHER
+
+69. Khách hàng KH067
+CUSTOMER_ID = KH067.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL68 | KH067 | OTHER
+CALL994 | KH067 | OTHER
+
+70. Khách hàng KH068
+CUSTOMER_ID = KH068.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL69 | KH068 | OTHER
+CALL855 | KH068 | OTHER
+
+71. Khách hàng KH069
+CUSTOMER_ID = KH069.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL70 | KH069 | OTHER
+
+72. Khách hàng KH070
+CUSTOMER_ID = KH070.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL71 | KH070 | DNC
+CALL569 | KH070 | OTHER
+CALL671 | KH070 | DNC
+CALL921 | KH070 | DNC
+CALL970 | KH070 | OTHER
+
+73. Khách hàng KH071
+CUSTOMER_ID = KH071.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL72 | KH071 | DNC
+CALL638 | KH071 | OTHER
+CALL775 | KH071 | OTHER
+CALL849 | KH071 | DNC
+CALL870 | KH071 | OTHER
+CALL887 | KH071 | DNC
+
+74. Khách hàng KH072
+CUSTOMER_ID = KH072.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL73 | KH072 | DNC
+CALL889 | KH072 | OTHER
+
+75. Khách hàng KH073
+CUSTOMER_ID = KH073.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL74 | KH073 | DNC
+CALL519 | KH073 | DNC
+CALL653 | KH073 | OTHER
+
+76. Khách hàng KH074
+CUSTOMER_ID = KH074.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL75 | KH074 | DNC
+CALL591 | KH074 | OTHER
+CALL754 | KH074 | OTHER
+CALL902 | KH074 | DNC
+CALL952 | KH074 | OTHER
+
+77. Khách hàng KH075
+CUSTOMER_ID = KH075.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL76 | KH075 | OTHER
+CALL567 | KH075 | DNC
+CALL696 | KH075 | OTHER
+CALL800 | KH075 | DNC
+
+78. Khách hàng KH076
+CUSTOMER_ID = KH076.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL77 | KH076 | OTHER
+CALL305 | KH076 | OTHER
+CALL361 | KH076 | DNC
+CALL694 | KH076 | OTHER
+CALL717 | KH076 | DNC
+CALL799 | KH076 | DNC
+
+79. Khách hàng KH077
+CUSTOMER_ID = KH077.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL78 | KH077 | DNC
+CALL303 | KH077 | OTHER
+CALL518 | KH077 | OTHER
+CALL836 | KH077 | DNC
+CALL893 | KH077 | OTHER
+
+80. Khách hàng KH078
+CUSTOMER_ID = KH078.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL79 | KH078 | OTHER
+CALL586 | KH078 | OTHER
+
+81. Khách hàng KH079
+CUSTOMER_ID = KH079.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL80 | KH079 | DNC
+CALL389 | KH079 | OTHER
+CALL562 | KH079 | OTHER
+CALL856 | KH079 | DNC
+CALL957 | KH079 | OTHER
+
+82. Khách hàng KH080
+CUSTOMER_ID = KH080.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL81 | KH080 | OTHER
+CALL312 | KH080 | OTHER
+CALL592 | KH080 | DNC
+CALL674 | KH080 | OTHER
+CALL743 | KH080 | OTHER
+
+83. Khách hàng KH081
+CUSTOMER_ID = KH081.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL82 | KH081 | OTHER
+CALL508 | KH081 | DNC
+CALL759 | KH081 | DNC
+CALL976 | KH081 | OTHER
+
+84. Khách hàng KH082
+CUSTOMER_ID = KH082.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL83 | KH082 | DNC
+CALL378 | KH082 | OTHER
+CALL829 | KH082 | DNC
+CALL951 | KH082 | OTHER
+
+85. Khách hàng KH083
+CUSTOMER_ID = KH083.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL84 | KH083 | DNC
+CALL876 | KH083 | DNC
+
+86. Khách hàng KH084
+CUSTOMER_ID = KH084.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL85 | KH084 | OTHER
+CALL429 | KH084 | OTHER
+
+87. Khách hàng KH085
+CUSTOMER_ID = KH085.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL86 | KH085 | DNC
+CALL520 | KH085 | OTHER
+CALL857 | KH085 | OTHER
+CALL997 | KH085 | DNC
+
+88. Khách hàng KH086
+CUSTOMER_ID = KH086.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL87 | KH086 | OTHER
+CALL427 | KH086 | OTHER
+
+89. Khách hàng KH087
+CUSTOMER_ID = KH087.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL88 | KH087 | OTHER
+CALL356 | KH087 | OTHER
+CALL795 | KH087 | DNC
+
+90. Khách hàng KH088
+CUSTOMER_ID = KH088.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL89 | KH088 | DNC
+
+91. Khách hàng KH089
+CUSTOMER_ID = KH089.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL90 | KH089 | DNC
+CALL801 | KH089 | OTHER
+CALL826 | KH089 | DNC
+
+92. Khách hàng KH090
+CUSTOMER_ID = KH090.
+Khách hàng này có 7 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL91 | KH090 | OTHER
+CALL348 | KH090 | OTHER
+CALL532 | KH090 | OTHER
+CALL644 | KH090 | DNC
+CALL698 | KH090 | DNC
+CALL918 | KH090 | OTHER
+CALL977 | KH090 | OTHER
+
+93. Khách hàng KH091
+CUSTOMER_ID = KH091.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL92 | KH091 | OTHER
+CALL314 | KH091 | OTHER
+
+94. Khách hàng KH092
+CUSTOMER_ID = KH092.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL93 | KH092 | DNC
+CALL482 | KH092 | DNC
+
+95. Khách hàng KH093
+CUSTOMER_ID = KH093.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL94 | KH093 | DNC
+CALL534 | KH093 | OTHER
+CALL611 | KH093 | DNC
+CALL846 | KH093 | OTHER
+CALL940 | KH093 | OTHER
+
+96. Khách hàng KH094
+CUSTOMER_ID = KH094.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL95 | KH094 | DNC
+CALL457 | KH094 | OTHER
+CALL993 | KH094 | OTHER
+
+97. Khách hàng KH095
+CUSTOMER_ID = KH095.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL96 | KH095 | OTHER
+CALL477 | KH095 | DNC
+
+98. Khách hàng KH096
+CUSTOMER_ID = KH096.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL97 | KH096 | OTHER
+CALL905 | KH096 | OTHER
+CALL935 | KH096 | OTHER
+
+99. Khách hàng KH097
+CUSTOMER_ID = KH097.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL98 | KH097 | OTHER
+
+100. Khách hàng KH098
+CUSTOMER_ID = KH098.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL99 | KH098 | DNC
+CALL637 | KH098 | OTHER
+CALL929 | KH098 | DNC
+
+101. Khách hàng KH099
+CUSTOMER_ID = KH099.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL100 | KH099 | DNC
+CALL324 | KH099 | DNC
+CALL346 | KH099 | OTHER
+CALL475 | KH099 | DNC
+
+102. Khách hàng KH100
+CUSTOMER_ID = KH100.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL101 | KH100 | OTHER
+CALL797 | KH100 | OTHER
+CALL864 | KH100 | DNC
+
+103. Khách hàng KH101
+CUSTOMER_ID = KH101.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL102 | KH101 | OTHER
+CALL339 | KH101 | DNC
+
+104. Khách hàng KH102
+CUSTOMER_ID = KH102.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL103 | KH102 | OTHER
+CALL433 | KH102 | DNC
+CALL516 | KH102 | OTHER
+CALL625 | KH102 | OTHER
+
+105. Khách hàng KH103
+CUSTOMER_ID = KH103.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL104 | KH103 | OTHER
+CALL869 | KH103 | OTHER
+CALL924 | KH103 | OTHER
+CALL979 | KH103 | OTHER
+
+106. Khách hàng KH104
+CUSTOMER_ID = KH104.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL105 | KH104 | DNC
+CALL923 | KH104 | DNC
+
+107. Khách hàng KH105
+CUSTOMER_ID = KH105.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL106 | KH105 | OTHER
+
+108. Khách hàng KH106
+CUSTOMER_ID = KH106.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL107 | KH106 | OTHER
+CALL690 | KH106 | DNC
+
+109. Khách hàng KH107
+CUSTOMER_ID = KH107.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL108 | KH107 | OTHER
+CALL506 | KH107 | OTHER
+
+110. Khách hàng KH108
+CUSTOMER_ID = KH108.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL109 | KH108 | DNC
+CALL308 | KH108 | OTHER
+CALL351 | KH108 | OTHER
+
+111. Khách hàng KH109
+CUSTOMER_ID = KH109.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL110 | KH109 | OTHER
+CALL412 | KH109 | OTHER
+CALL686 | KH109 | OTHER
+
+112. Khách hàng KH110
+CUSTOMER_ID = KH110.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL111 | KH110 | DNC
+CALL967 | KH110 | OTHER
+
+113. Khách hàng KH111
+CUSTOMER_ID = KH111.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL112 | KH111 | OTHER
+CALL692 | KH111 | OTHER
+CALL726 | KH111 | OTHER
+CALL767 | KH111 | OTHER
+
+114. Khách hàng KH112
+CUSTOMER_ID = KH112.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL113 | KH112 | OTHER
+CALL425 | KH112 | OTHER
+
+115. Khách hàng KH113
+CUSTOMER_ID = KH113.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL114 | KH113 | OTHER
+CALL369 | KH113 | DNC
+CALL401 | KH113 | OTHER
+
+116. Khách hàng KH114
+CUSTOMER_ID = KH114.
+Khách hàng này có 6 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL115 | KH114 | OTHER
+CALL321 | KH114 | DNC
+CALL467 | KH114 | OTHER
+CALL664 | KH114 | OTHER
+CALL708 | KH114 | OTHER
+CALL879 | KH114 | OTHER
+
+117. Khách hàng KH115
+CUSTOMER_ID = KH115.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL116 | KH115 | DNC
+CALL744 | KH115 | OTHER
+
+118. Khách hàng KH116
+CUSTOMER_ID = KH116.
+Khách hàng này có 6 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL117 | KH116 | OTHER
+CALL360 | KH116 | OTHER
+CALL500 | KH116 | OTHER
+CALL559 | KH116 | OTHER
+CALL654 | KH116 | OTHER
+CALL998 | KH116 | DNC
+
+119. Khách hàng KH117
+CUSTOMER_ID = KH117.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL118 | KH117 | DNC
+CALL323 | KH117 | DNC
+CALL727 | KH117 | OTHER
+
+120. Khách hàng KH118
+CUSTOMER_ID = KH118.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL119 | KH118 | OTHER
+CALL635 | KH118 | OTHER
+CALL780 | KH118 | OTHER
+
+121. Khách hàng KH119
+CUSTOMER_ID = KH119.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL120 | KH119 | OTHER
+CALL388 | KH119 | DNC
+CALL512 | KH119 | DNC
+
+122. Khách hàng KH120
+CUSTOMER_ID = KH120.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL121 | KH120 | DNC
+CALL515 | KH120 | OTHER
+CALL582 | KH120 | OTHER
+CALL662 | KH120 | OTHER
+CALL693 | KH120 | DNC
+
+123. Khách hàng KH121
+CUSTOMER_ID = KH121.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL122 | KH121 | OTHER
+CALL359 | KH121 | OTHER
+CALL385 | KH121 | DNC
+CALL600 | KH121 | OTHER
+CALL670 | KH121 | OTHER
+
+124. Khách hàng KH122
+CUSTOMER_ID = KH122.
+Khách hàng này có 5 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL123 | KH122 | OTHER
+CALL313 | KH122 | OTHER
+CALL701 | KH122 | OTHER
+CALL859 | KH122 | OTHER
+CALL980 | KH122 | OTHER
+
+125. Khách hàng KH123
+CUSTOMER_ID = KH123.
+Khách hàng này có 6 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL124 | KH123 | DNC
+CALL383 | KH123 | DNC
+CALL423 | KH123 | DNC
+CALL556 | KH123 | OTHER
+CALL581 | KH123 | OTHER
+CALL862 | KH123 | DNC
+
+126. Khách hàng KH124
+CUSTOMER_ID = KH124.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL125 | KH124 | OTHER
+CALL464 | KH124 | OTHER
+CALL614 | KH124 | OTHER
+CALL904 | KH124 | OTHER
+
+127. Khách hàng KH125
+CUSTOMER_ID = KH125.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL126 | KH125 | OTHER
+CALL366 | KH125 | DNC
+CALL434 | KH125 | DNC
+CALL468 | KH125 | DNC
+CALL566 | KH125 | OTHER
+
+128. Khách hàng KH126
+CUSTOMER_ID = KH126.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL127 | KH126 | OTHER
+CALL362 | KH126 | OTHER
+CALL451 | KH126 | OTHER
+CALL609 | KH126 | OTHER
+
+129. Khách hàng KH127
+CUSTOMER_ID = KH127.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL128 | KH127 | OTHER
+CALL380 | KH127 | OTHER
+CALL421 | KH127 | DNC
+
+130. Khách hàng KH128
+CUSTOMER_ID = KH128.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL129 | KH128 | DNC
+CALL318 | KH128 | DNC
+CALL962 | KH128 | OTHER
+
+131. Khách hàng KH129
+CUSTOMER_ID = KH129.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL130 | KH129 | DNC
+CALL474 | KH129 | DNC
+
+132. Khách hàng KH130
+CUSTOMER_ID = KH130.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL131 | KH130 | DNC
+
+133. Khách hàng KH131
+CUSTOMER_ID = KH131.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL132 | KH131 | OTHER
+
+134. Khách hàng KH132
+CUSTOMER_ID = KH132.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL133 | KH132 | OTHER
+CALL426 | KH132 | OTHER
+CALL648 | KH132 | OTHER
+
+135. Khách hàng KH133
+CUSTOMER_ID = KH133.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL134 | KH133 | OTHER
+
+136. Khách hàng KH134
+CUSTOMER_ID = KH134.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL135 | KH134 | DNC
+CALL330 | KH134 | DNC
+CALL411 | KH134 | DNC
+CALL966 | KH134 | OTHER
+
+137. Khách hàng KH135
+CUSTOMER_ID = KH135.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL136 | KH135 | DNC
+CALL660 | KH135 | OTHER
+
+138. Khách hàng KH136
+CUSTOMER_ID = KH136.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL137 | KH136 | OTHER
+CALL331 | KH136 | DNC
+CALL507 | KH136 | OTHER
+CALL593 | KH136 | DNC
+
+139. Khách hàng KH137
+CUSTOMER_ID = KH137.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL138 | KH137 | OTHER
+CALL750 | KH137 | DNC
+
+140. Khách hàng KH138
+CUSTOMER_ID = KH138.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL139 | KH138 | DNC
+CALL450 | KH138 | DNC
+CALL531 | KH138 | OTHER
+
+141. Khách hàng KH139
+CUSTOMER_ID = KH139.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL140 | KH139 | OTHER
+CALL447 | KH139 | OTHER
+
+142. Khách hàng KH140
+CUSTOMER_ID = KH140.
+Khách hàng này có 7 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL141 | KH140 | DNC
+CALL402 | KH140 | OTHER
+CALL524 | KH140 | OTHER
+CALL564 | KH140 | OTHER
+CALL647 | KH140 | OTHER
+CALL751 | KH140 | OTHER
+CALL764 | KH140 | OTHER
+
+143. Khách hàng KH141
+CUSTOMER_ID = KH141.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL142 | KH141 | OTHER
+CALL718 | KH141 | OTHER
+
+144. Khách hàng KH142
+CUSTOMER_ID = KH142.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL143 | KH142 | OTHER
+CALL381 | KH142 | OTHER
+CALL460 | KH142 | OTHER
+CALL570 | KH142 | OTHER
+CALL683 | KH142 | DNC
+
+145. Khách hàng KH143
+CUSTOMER_ID = KH143.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL144 | KH143 | DNC
+CALL325 | KH143 | OTHER
+CALL326 | KH143 | DNC
+CALL747 | KH143 | OTHER
+
+146. Khách hàng KH144
+CUSTOMER_ID = KH144.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL145 | KH144 | OTHER
+CALL677 | KH144 | DNC
+
+147. Khách hàng KH145
+CUSTOMER_ID = KH145.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL146 | KH145 | OTHER
+CALL513 | KH145 | OTHER
+CALL830 | KH145 | DNC
+
+148. Khách hàng KH146
+CUSTOMER_ID = KH146.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL147 | KH146 | DNC
+CALL357 | KH146 | OTHER
+CALL860 | KH146 | OTHER
+CALL875 | KH146 | DNC
+
+149. Khách hàng KH147
+CUSTOMER_ID = KH147.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL148 | KH147 | OTHER
+CALL634 | KH147 | OTHER
+CALL968 | KH147 | OTHER
+
+150. Khách hàng KH148
+CUSTOMER_ID = KH148.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL149 | KH148 | OTHER
+CALL554 | KH148 | OTHER
+CALL601 | KH148 | OTHER
+CALL895 | KH148 | DNC
+
+151. Khách hàng KH149
+CUSTOMER_ID = KH149.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL150 | KH149 | DNC
+CALL776 | KH149 | DNC
+CALL975 | KH149 | OTHER
+
+152. Khách hàng KH150
+CUSTOMER_ID = KH150.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL151 | KH150 | OTHER
+CALL563 | KH150 | OTHER
+
+153. Khách hàng KH151
+CUSTOMER_ID = KH151.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL152 | KH151 | OTHER
+
+154. Khách hàng KH152
+CUSTOMER_ID = KH152.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL153 | KH152 | DNC
+CALL345 | KH152 | OTHER
+CALL481 | KH152 | DNC
+CALL629 | KH152 | DNC
+CALL650 | KH152 | OTHER
+CALL850 | KH152 | OTHER
+
+155. Khách hàng KH153
+CUSTOMER_ID = KH153.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL154 | KH153 | DNC
+CALL398 | KH153 | OTHER
+CALL574 | KH153 | OTHER
+
+156. Khách hàng KH154
+CUSTOMER_ID = KH154.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL155 | KH154 | OTHER
+CALL343 | KH154 | OTHER
+CALL605 | KH154 | OTHER
+CALL622 | KH154 | OTHER
+
+157. Khách hàng KH155
+CUSTOMER_ID = KH155.
+Khách hàng này có 5 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL156 | KH155 | OTHER
+CALL349 | KH155 | OTHER
+CALL435 | KH155 | OTHER
+CALL666 | KH155 | OTHER
+CALL774 | KH155 | OTHER
+
+158. Khách hàng KH156
+CUSTOMER_ID = KH156.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL157 | KH156 | OTHER
+CALL523 | KH156 | OTHER
+CALL810 | KH156 | OTHER
+
+159. Khách hàng KH157
+CUSTOMER_ID = KH157.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL158 | KH157 | OTHER
+CALL943 | KH157 | OTHER
+
+160. Khách hàng KH158
+CUSTOMER_ID = KH158.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL159 | KH158 | DNC
+CALL771 | KH158 | DNC
+
+161. Khách hàng KH159
+CUSTOMER_ID = KH159.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL160 | KH159 | DNC
+CALL752 | KH159 | OTHER
+
+162. Khách hàng KH160
+CUSTOMER_ID = KH160.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL161 | KH160 | DNC
+CALL431 | KH160 | OTHER
+CALL557 | KH160 | OTHER
+CALL741 | KH160 | DNC
+
+163. Khách hàng KH161
+CUSTOMER_ID = KH161.
+Khách hàng này có 5 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL162 | KH161 | OTHER
+CALL333 | KH161 | OTHER
+CALL730 | KH161 | OTHER
+CALL784 | KH161 | OTHER
+CALL961 | KH161 | OTHER
+
+164. Khách hàng KH162
+CUSTOMER_ID = KH162.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL163 | KH162 | DNC
+CALL808 | KH162 | DNC
+CALL925 | KH162 | OTHER
+
+165. Khách hàng KH163
+CUSTOMER_ID = KH163.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL164 | KH163 | DNC
+CALL597 | KH163 | OTHER
+CALL989 | KH163 | OTHER
+
+166. Khách hàng KH164
+CUSTOMER_ID = KH164.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL165 | KH164 | DNC
+CALL386 | KH164 | OTHER
+CALL885 | KH164 | OTHER
+CALL973 | KH164 | OTHER
+
+167. Khách hàng KH165
+CUSTOMER_ID = KH165.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL166 | KH165 | OTHER
+CALL353 | KH165 | OTHER
+CALL580 | KH165 | OTHER
+CALL821 | KH165 | OTHER
+CALL941 | KH165 | DNC
+
+168. Khách hàng KH166
+CUSTOMER_ID = KH166.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL167 | KH166 | DNC
+CALL527 | KH166 | OTHER
+CALL545 | KH166 | DNC
+CALL807 | KH166 | OTHER
+
+169. Khách hàng KH167
+CUSTOMER_ID = KH167.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL168 | KH167 | OTHER
+CALL720 | KH167 | DNC
+CALL760 | KH167 | OTHER
+CALL788 | KH167 | DNC
+
+170. Khách hàng KH168
+CUSTOMER_ID = KH168.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL169 | KH168 | OTHER
+CALL643 | KH168 | OTHER
+CALL942 | KH168 | OTHER
+
+171. Khách hàng KH169
+CUSTOMER_ID = KH169.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL170 | KH169 | DNC
+CALL540 | KH169 | OTHER
+CALL595 | KH169 | OTHER
+CALL842 | KH169 | OTHER
+
+172. Khách hàng KH170
+CUSTOMER_ID = KH170.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL171 | KH170 | DNC
+CALL341 | KH170 | OTHER
+CALL391 | KH170 | OTHER
+CALL588 | KH170 | OTHER
+CALL931 | KH170 | DNC
+
+173. Khách hàng KH171
+CUSTOMER_ID = KH171.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL172 | KH171 | OTHER
+CALL316 | KH171 | OTHER
+CALL538 | KH171 | DNC
+CALL688 | KH171 | DNC
+CALL916 | KH171 | DNC
+
+174. Khách hàng KH172
+CUSTOMER_ID = KH172.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL173 | KH172 | DNC
+CALL358 | KH172 | DNC
+CALL833 | KH172 | DNC
+CALL886 | KH172 | OTHER
+
+175. Khách hàng KH173
+CUSTOMER_ID = KH173.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL174 | KH173 | DNC
+CALL413 | KH173 | OTHER
+CALL854 | KH173 | OTHER
+
+176. Khách hàng KH174
+CUSTOMER_ID = KH174.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL175 | KH174 | OTHER
+CALL651 | KH174 | OTHER
+CALL794 | KH174 | DNC
+CALL831 | KH174 | OTHER
+
+177. Khách hàng KH175
+CUSTOMER_ID = KH175.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL176 | KH175 | OTHER
+CALL440 | KH175 | DNC
+CALL459 | KH175 | DNC
+CALL490 | KH175 | DNC
+CALL847 | KH175 | OTHER
+
+178. Khách hàng KH176
+CUSTOMER_ID = KH176.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL177 | KH176 | OTHER
+CALL824 | KH176 | OTHER
+
+179. Khách hàng KH177
+CUSTOMER_ID = KH177.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL178 | KH177 | OTHER
+CALL578 | KH177 | DNC
+
+180. Khách hàng KH178
+CUSTOMER_ID = KH178.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL179 | KH178 | OTHER
+CALL438 | KH178 | OTHER
+
+181. Khách hàng KH179
+CUSTOMER_ID = KH179.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL180 | KH179 | DNC
+CALL798 | KH179 | DNC
+CALL880 | KH179 | OTHER
+
+182. Khách hàng KH180
+CUSTOMER_ID = KH180.
+Khách hàng này có 5 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL181 | KH180 | DNC
+CALL418 | KH180 | DNC
+CALL745 | KH180 | OTHER
+CALL753 | KH180 | DNC
+CALL838 | KH180 | DNC
+
+183. Khách hàng KH181
+CUSTOMER_ID = KH181.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL182 | KH181 | OTHER
+CALL636 | KH181 | DNC
+CALL917 | KH181 | OTHER
+CALL947 | KH181 | OTHER
+
+184. Khách hàng KH182
+CUSTOMER_ID = KH182.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL183 | KH182 | OTHER
+CALL458 | KH182 | OTHER
+CALL781 | KH182 | DNC
+
+185. Khách hàng KH183
+CUSTOMER_ID = KH183.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL184 | KH183 | OTHER
+
+186. Khách hàng KH184
+CUSTOMER_ID = KH184.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL185 | KH184 | OTHER
+CALL682 | KH184 | DNC
+CALL700 | KH184 | OTHER
+
+187. Khách hàng KH185
+CUSTOMER_ID = KH185.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL186 | KH185 | OTHER
+CALL907 | KH185 | DNC
+
+188. Khách hàng KH186
+CUSTOMER_ID = KH186.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL187 | KH186 | OTHER
+CALL443 | KH186 | OTHER
+CALL550 | KH186 | OTHER
+CALL680 | KH186 | DNC
+CALL706 | KH186 | OTHER
+CALL790 | KH186 | DNC
+
+189. Khách hàng KH187
+CUSTOMER_ID = KH187.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL188 | KH187 | DNC
+CALL641 | KH187 | OTHER
+
+190. Khách hàng KH188
+CUSTOMER_ID = KH188.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL189 | KH188 | OTHER
+CALL646 | KH188 | OTHER
+CALL955 | KH188 | DNC
+
+191. Khách hàng KH189
+CUSTOMER_ID = KH189.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL190 | KH189 | DNC
+CALL659 | KH189 | OTHER
+CALL681 | KH189 | OTHER
+CALL746 | KH189 | DNC
+CALL814 | KH189 | OTHER
+CALL932 | KH189 | OTHER
+
+192. Khách hàng KH190
+CUSTOMER_ID = KH190.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL191 | KH190 | OTHER
+CALL304 | KH190 | OTHER
+CALL439 | KH190 | DNC
+CALL672 | KH190 | OTHER
+CALL678 | KH190 | DNC
+CALL958 | KH190 | DNC
+
+193. Khách hàng KH191
+CUSTOMER_ID = KH191.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL192 | KH191 | DNC
+CALL661 | KH191 | DNC
+CALL735 | KH191 | OTHER
+CALL872 | KH191 | OTHER
+
+194. Khách hàng KH192
+CUSTOMER_ID = KH192.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL193 | KH192 | DNC
+CALL608 | KH192 | OTHER
+CALL731 | KH192 | OTHER
+CALL884 | KH192 | DNC
+CALL912 | KH192 | DNC
+
+195. Khách hàng KH193
+CUSTOMER_ID = KH193.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL194 | KH193 | OTHER
+CALL432 | KH193 | DNC
+CALL841 | KH193 | OTHER
+
+196. Khách hàng KH194
+CUSTOMER_ID = KH194.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL195 | KH194 | OTHER
+
+197. Khách hàng KH195
+CUSTOMER_ID = KH195.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL196 | KH195 | DNC
+CALL347 | KH195 | OTHER
+CALL414 | KH195 | DNC
+CALL455 | KH195 | DNC
+CALL501 | KH195 | OTHER
+CALL779 | KH195 | OTHER
+
+198. Khách hàng KH196
+CUSTOMER_ID = KH196.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL197 | KH196 | DNC
+CALL585 | KH196 | DNC
+CALL613 | KH196 | OTHER
+CALL627 | KH196 | OTHER
+CALL867 | KH196 | OTHER
+
+199. Khách hàng KH197
+CUSTOMER_ID = KH197.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL198 | KH197 | OTHER
+CALL365 | KH197 | OTHER
+
+200. Khách hàng KH198
+CUSTOMER_ID = KH198.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL199 | KH198 | OTHER
+CALL835 | KH198 | DNC
+CALL883 | KH198 | OTHER
+CALL934 | KH198 | DNC
+
+201. Khách hàng KH199
+CUSTOMER_ID = KH199.
+Khách hàng này có 1 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL200 | KH199 | OTHER
+
+202. Khách hàng KH200
+CUSTOMER_ID = KH200.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL201 | KH200 | OTHER
+CALL910 | KH200 | OTHER
+
+203. Khách hàng KH201
+CUSTOMER_ID = KH201.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL202 | KH201 | DNC
+CALL839 | KH201 | DNC
+
+204. Khách hàng KH202
+CUSTOMER_ID = KH202.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL203 | KH202 | OTHER
+CALL407 | KH202 | OTHER
+
+205. Khách hàng KH203
+CUSTOMER_ID = KH203.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL204 | KH203 | OTHER
+CALL630 | KH203 | DNC
+CALL657 | KH203 | DNC
+CALL772 | KH203 | OTHER
+CALL793 | KH203 | OTHER
+
+206. Khách hàng KH204
+CUSTOMER_ID = KH204.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL205 | KH204 | OTHER
+CALL594 | KH204 | OTHER
+CALL655 | KH204 | OTHER
+CALL985 | KH204 | OTHER
+
+207. Khách hàng KH205
+CUSTOMER_ID = KH205.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL206 | KH205 | OTHER
+CALL933 | KH205 | OTHER
+
+208. Khách hàng KH206
+CUSTOMER_ID = KH206.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL207 | KH206 | OTHER
+CALL542 | KH206 | OTHER
+CALL755 | KH206 | DNC
+CALL792 | KH206 | OTHER
+
+209. Khách hàng KH207
+CUSTOMER_ID = KH207.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL208 | KH207 | DNC
+CALL546 | KH207 | OTHER
+
+210. Khách hàng KH208
+CUSTOMER_ID = KH208.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL209 | KH208 | OTHER
+CALL404 | KH208 | OTHER
+CALL787 | KH208 | DNC
+CALL950 | KH208 | DNC
+
+211. Khách hàng KH209
+CUSTOMER_ID = KH209.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL210 | KH209 | DNC
+CALL311 | KH209 | OTHER
+CALL463 | KH209 | OTHER
+CALL676 | KH209 | OTHER
+
+212. Khách hàng KH210
+CUSTOMER_ID = KH210.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL211 | KH210 | OTHER
+CALL344 | KH210 | DNC
+CALL987 | KH210 | OTHER
+
+213. Khách hàng KH211
+CUSTOMER_ID = KH211.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL212 | KH211 | DNC
+CALL317 | KH211 | OTHER
+CALL583 | KH211 | DNC
+
+214. Khách hàng KH212
+CUSTOMER_ID = KH212.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL213 | KH212 | DNC
+
+215. Khách hàng KH213
+CUSTOMER_ID = KH213.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL214 | KH213 | OTHER
+CALL392 | KH213 | DNC
+CALL571 | KH213 | DNC
+CALL881 | KH213 | DNC
+
+216. Khách hàng KH214
+CUSTOMER_ID = KH214.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL215 | KH214 | DNC
+CALL499 | KH214 | OTHER
+CALL786 | KH214 | DNC
+
+217. Khách hàng KH215
+CUSTOMER_ID = KH215.
+Khách hàng này có 5 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL216 | KH215 | OTHER
+CALL399 | KH215 | OTHER
+CALL758 | KH215 | OTHER
+CALL868 | KH215 | OTHER
+CALL897 | KH215 | OTHER
+
+218. Khách hàng KH216
+CUSTOMER_ID = KH216.
+Khách hàng này có 5 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL217 | KH216 | OTHER
+CALL393 | KH216 | DNC
+CALL415 | KH216 | DNC
+CALL441 | KH216 | OTHER
+CALL704 | KH216 | OTHER
+
+219. Khách hàng KH217
+CUSTOMER_ID = KH217.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL218 | KH217 | OTHER
+CALL739 | KH217 | OTHER
+CALL844 | KH217 | OTHER
+
+220. Khách hàng KH218
+CUSTOMER_ID = KH218.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL219 | KH218 | OTHER
+CALL471 | KH218 | OTHER
+CALL623 | KH218 | OTHER
+CALL765 | KH218 | OTHER
+
+221. Khách hàng KH219
+CUSTOMER_ID = KH219.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL220 | KH219 | OTHER
+CALL713 | KH219 | OTHER
+CALL944 | KH219 | DNC
+
+222. Khách hàng KH220
+CUSTOMER_ID = KH220.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL221 | KH220 | OTHER
+CALL409 | KH220 | DNC
+CALL503 | KH220 | DNC
+CALL748 | KH220 | OTHER
+
+223. Khách hàng KH221
+CUSTOMER_ID = KH221.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL222 | KH221 | OTHER
+CALL778 | KH221 | DNC
+
+224. Khách hàng KH222
+CUSTOMER_ID = KH222.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL223 | KH222 | DNC
+
+225. Khách hàng KH223
+CUSTOMER_ID = KH223.
+Khách hàng này có 4 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL224 | KH223 | DNC
+CALL332 | KH223 | DNC
+CALL445 | KH223 | DNC
+CALL948 | KH223 | DNC
+
+226. Khách hàng KH224
+CUSTOMER_ID = KH224.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL225 | KH224 | OTHER
+CALL535 | KH224 | OTHER
+CALL878 | KH224 | DNC
+
+227. Khách hàng KH225
+CUSTOMER_ID = KH225.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL226 | KH225 | OTHER
+CALL522 | KH225 | DNC
+CALL827 | KH225 | OTHER
+CALL953 | KH225 | DNC
+
+228. Khách hàng KH226
+CUSTOMER_ID = KH226.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL227 | KH226 | OTHER
+CALL589 | KH226 | DNC
+CALL640 | KH226 | DNC
+
+229. Khách hàng KH227
+CUSTOMER_ID = KH227.
+Khách hàng này có 7 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL228 | KH227 | OTHER
+CALL354 | KH227 | OTHER
+CALL375 | KH227 | OTHER
+CALL502 | KH227 | DNC
+CALL533 | KH227 | OTHER
+CALL621 | KH227 | OTHER
+CALL766 | KH227 | OTHER
+
+230. Khách hàng KH228
+CUSTOMER_ID = KH228.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL229 | KH228 | DNC
+CALL679 | KH228 | OTHER
+CALL715 | KH228 | DNC
+CALL945 | KH228 | DNC
+CALL972 | KH228 | OTHER
+
+231. Khách hàng KH229
+CUSTOMER_ID = KH229.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL230 | KH229 | OTHER
+CALL577 | KH229 | OTHER
+
+232. Khách hàng KH230
+CUSTOMER_ID = KH230.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL231 | KH230 | OTHER
+CALL805 | KH230 | OTHER
+CALL861 | KH230 | DNC
+
+233. Khách hàng KH231
+CUSTOMER_ID = KH231.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL232 | KH231 | OTHER
+CALL453 | KH231 | DNC
+CALL990 | KH231 | OTHER
+
+234. Khách hàng KH232
+CUSTOMER_ID = KH232.
+Khách hàng này có 3 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL233 | KH232 | DNC
+CALL813 | KH232 | DNC
+CALL971 | KH232 | DNC
+
+235. Khách hàng KH233
+CUSTOMER_ID = KH233.
+Khách hàng này có 5 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL234 | KH233 | OTHER
+CALL473 | KH233 | DNC
+CALL514 | KH233 | DNC
+CALL685 | KH233 | DNC
+CALL728 | KH233 | DNC
+
+236. Khách hàng KH234
+CUSTOMER_ID = KH234.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL235 | KH234 | DNC
+CALL590 | KH234 | DNC
+CALL624 | KH234 | OTHER
+
+237. Khách hàng KH235
+CUSTOMER_ID = KH235.
+Khách hàng này có 3 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL236 | KH235 | DNC
+CALL898 | KH235 | DNC
+CALL922 | KH235 | DNC
+
+238. Khách hàng KH236
+CUSTOMER_ID = KH236.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL237 | KH236 | OTHER
+CALL322 | KH236 | DNC
+CALL444 | KH236 | OTHER
+CALL617 | KH236 | DNC
+CALL783 | KH236 | OTHER
+CALL789 | KH236 | OTHER
+
+239. Khách hàng KH237
+CUSTOMER_ID = KH237.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL238 | KH237 | OTHER
+CALL410 | KH237 | DNC
+CALL616 | KH237 | OTHER
+CALL866 | KH237 | OTHER
+
+240. Khách hàng KH238
+CUSTOMER_ID = KH238.
+Khách hàng này có 5 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL239 | KH238 | DNC
+CALL373 | KH238 | OTHER
+CALL454 | KH238 | OTHER
+CALL665 | KH238 | OTHER
+CALL919 | KH238 | OTHER
+
+241. Khách hàng KH239
+CUSTOMER_ID = KH239.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL240 | KH239 | DNC
+CALL449 | KH239 | OTHER
+CALL619 | KH239 | OTHER
+
+242. Khách hàng KH240
+CUSTOMER_ID = KH240.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL241 | KH240 | OTHER
+CALL405 | KH240 | OTHER
+CALL652 | KH240 | OTHER
+
+243. Khách hàng KH241
+CUSTOMER_ID = KH241.
+Khách hàng này có 6 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL242 | KH241 | DNC
+CALL489 | KH241 | OTHER
+CALL511 | KH241 | DNC
+CALL537 | KH241 | DNC
+CALL863 | KH241 | OTHER
+CALL890 | KH241 | OTHER
+
+244. Khách hàng KH242
+CUSTOMER_ID = KH242.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL243 | KH242 | OTHER
+CALL888 | KH242 | OTHER
+
+245. Khách hàng KH243
+CUSTOMER_ID = KH243.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL244 | KH243 | OTHER
+CALL584 | KH243 | OTHER
+CALL732 | KH243 | DNC
+
+246. Khách hàng KH244
+CUSTOMER_ID = KH244.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL245 | KH244 | OTHER
+CALL379 | KH244 | OTHER
+
+247. Khách hàng KH245
+CUSTOMER_ID = KH245.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL246 | KH245 | OTHER
+CALL492 | KH245 | DNC
+
+248. Khách hàng KH246
+CUSTOMER_ID = KH246.
+Khách hàng này có 4 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL247 | KH246 | OTHER
+CALL712 | KH246 | OTHER
+CALL920 | KH246 | OTHER
+CALL986 | KH246 | OTHER
+
+249. Khách hàng KH247
+CUSTOMER_ID = KH247.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL248 | KH247 | OTHER
+CALL649 | KH247 | OTHER
+
+250. Khách hàng KH248
+CUSTOMER_ID = KH248.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL249 | KH248 | DNC
+CALL478 | KH248 | DNC
+CALL565 | KH248 | OTHER
+CALL626 | KH248 | DNC
+
+251. Khách hàng KH249
+CUSTOMER_ID = KH249.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL250 | KH249 | OTHER
+CALL555 | KH249 | DNC
+CALL848 | KH249 | DNC
+
+252. Khách hàng KH250
+CUSTOMER_ID = KH250.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL251 | KH250 | DNC
+CALL598 | KH250 | OTHER
+CALL770 | KH250 | OTHER
+
+253. Khách hàng KH251
+CUSTOMER_ID = KH251.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL252 | KH251 | DNC
+CALL576 | KH251 | OTHER
+
+254. Khách hàng KH252
+CUSTOMER_ID = KH252.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL253 | KH252 | OTHER
+CALL465 | KH252 | OTHER
+CALL487 | KH252 | DNC
+CALL536 | KH252 | OTHER
+CALL714 | KH252 | OTHER
+CALL969 | KH252 | DNC
+
+255. Khách hàng KH253
+CUSTOMER_ID = KH253.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL254 | KH253 | DNC
+CALL525 | KH253 | OTHER
+CALL669 | KH253 | DNC
+CALL803 | KH253 | OTHER
+
+256. Khách hàng KH254
+CUSTOMER_ID = KH254.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL255 | KH254 | DNC
+CALL456 | KH254 | OTHER
+CALL541 | KH254 | DNC
+
+257. Khách hàng KH255
+CUSTOMER_ID = KH255.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL256 | KH255 | OTHER
+CALL633 | KH255 | OTHER
+CALL936 | KH255 | DNC
+
+258. Khách hàng KH256
+CUSTOMER_ID = KH256.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL257 | KH256 | DNC
+CALL551 | KH256 | OTHER
+CALL899 | KH256 | OTHER
+CALL964 | KH256 | OTHER
+
+259. Khách hàng KH257
+CUSTOMER_ID = KH257.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL258 | KH257 | OTHER
+CALL822 | KH257 | DNC
+
+260. Khách hàng KH258
+CUSTOMER_ID = KH258.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL259 | KH258 | OTHER
+CALL882 | KH258 | DNC
+
+261. Khách hàng KH259
+CUSTOMER_ID = KH259.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL260 | KH259 | OTHER
+CALL376 | KH259 | OTHER
+CALL722 | KH259 | OTHER
+
+262. Khách hàng KH260
+CUSTOMER_ID = KH260.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL261 | KH260 | DNC
+CALL572 | KH260 | DNC
+CALL817 | KH260 | DNC
+CALL909 | KH260 | OTHER
+
+263. Khách hàng KH261
+CUSTOMER_ID = KH261.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL262 | KH261 | DNC
+CALL327 | KH261 | DNC
+CALL568 | KH261 | OTHER
+CALL978 | KH261 | DNC
+
+264. Khách hàng KH262
+CUSTOMER_ID = KH262.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL263 | KH262 | DNC
+CALL334 | KH262 | DNC
+CALL355 | KH262 | OTHER
+
+265. Khách hàng KH263
+CUSTOMER_ID = KH263.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL264 | KH263 | OTHER
+CALL877 | KH263 | DNC
+
+266. Khách hàng KH264
+CUSTOMER_ID = KH264.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL265 | KH264 | OTHER
+CALL926 | KH264 | DNC
+
+267. Khách hàng KH265
+CUSTOMER_ID = KH265.
+Khách hàng này có 4 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL266 | KH265 | OTHER
+CALL461 | KH265 | OTHER
+CALL874 | KH265 | OTHER
+CALL991 | KH265 | DNC
+
+268. Khách hàng KH266
+CUSTOMER_ID = KH266.
+Khách hàng này có 5 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL267 | KH266 | DNC
+CALL370 | KH266 | OTHER
+CALL937 | KH266 | DNC
+CALL996 | KH266 | DNC
+CALL999 | KH266 | OTHER
+
+269. Khách hàng KH267
+CUSTOMER_ID = KH267.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL268 | KH267 | DNC
+CALL382 | KH267 | OTHER
+CALL710 | KH267 | DNC
+
+270. Khách hàng KH268
+CUSTOMER_ID = KH268.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL269 | KH268 | OTHER
+CALL446 | KH268 | OTHER
+
+271. Khách hàng KH269
+CUSTOMER_ID = KH269.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL270 | KH269 | OTHER
+CALL479 | KH269 | OTHER
+CALL828 | KH269 | OTHER
+
+272. Khách hàng KH270
+CUSTOMER_ID = KH270.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL271 | KH270 | OTHER
+CALL843 | KH270 | DNC
+CALL853 | KH270 | DNC
+CALL908 | KH270 | OTHER
+
+273. Khách hàng KH271
+CUSTOMER_ID = KH271.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL272 | KH271 | OTHER
+CALL894 | KH271 | OTHER
+
+274. Khách hàng KH272
+CUSTOMER_ID = KH272.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL273 | KH272 | OTHER
+CALL721 | KH272 | DNC
+CALL757 | KH272 | DNC
+CALL960 | KH272 | DNC
+
+275. Khách hàng KH273
+CUSTOMER_ID = KH273.
+Khách hàng này có 1 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL274 | KH273 | DNC
+
+276. Khách hàng KH274
+CUSTOMER_ID = KH274.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL275 | KH274 | OTHER
+CALL406 | KH274 | DNC
+CALL483 | KH274 | DNC
+CALL596 | KH274 | DNC
+
+277. Khách hàng KH275
+CUSTOMER_ID = KH275.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL276 | KH275 | DNC
+CALL328 | KH275 | DNC
+CALL476 | KH275 | OTHER
+CALL658 | KH275 | DNC
+
+278. Khách hàng KH276
+CUSTOMER_ID = KH276.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL277 | KH276 | OTHER
+CALL338 | KH276 | OTHER
+CALL448 | KH276 | OTHER
+
+279. Khách hàng KH277
+CUSTOMER_ID = KH277.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL278 | KH277 | OTHER
+CALL417 | KH277 | DNC
+CALL645 | KH277 | OTHER
+CALL673 | KH277 | OTHER
+CALL697 | KH277 | DNC
+CALL852 | KH277 | OTHER
+
+280. Khách hàng KH278
+CUSTOMER_ID = KH278.
+Khách hàng này có 2 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL279 | KH278 | DNC
+CALL548 | KH278 | OTHER
+
+281. Khách hàng KH279
+CUSTOMER_ID = KH279.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL280 | KH279 | DNC
+CALL517 | KH279 | DNC
+CALL579 | KH279 | DNC
+CALL927 | KH279 | OTHER
+
+282. Khách hàng KH280
+CUSTOMER_ID = KH280.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL281 | KH280 | DNC
+CALL400 | KH280 | OTHER
+CALL620 | KH280 | DNC
+
+283. Khách hàng KH281
+CUSTOMER_ID = KH281.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL282 | KH281 | OTHER
+CALL377 | KH281 | OTHER
+
+284. Khách hàng KH282
+CUSTOMER_ID = KH282.
+Khách hàng này có 4 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL283 | KH282 | DNC
+CALL472 | KH282 | DNC
+CALL543 | KH282 | DNC
+CALL553 | KH282 | DNC
+
+285. Khách hàng KH283
+CUSTOMER_ID = KH283.
+Khách hàng này có 6 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL284 | KH283 | OTHER
+CALL509 | KH283 | DNC
+CALL558 | KH283 | OTHER
+CALL725 | KH283 | OTHER
+CALL983 | KH283 | DNC
+CALL992 | KH283 | OTHER
+
+286. Khách hàng KH284
+CUSTOMER_ID = KH284.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL285 | KH284 | OTHER
+CALL470 | KH284 | OTHER
+CALL485 | KH284 | DNC
+CALL691 | KH284 | DNC
+
+287. Khách hàng KH285
+CUSTOMER_ID = KH285.
+Khách hàng này có 2 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL286 | KH285 | DNC
+CALL736 | KH285 | DNC
+
+288. Khách hàng KH286
+CUSTOMER_ID = KH286.
+Khách hàng này có 4 cuộc gọi, gồm 3 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL287 | KH286 | OTHER
+CALL371 | KH286 | DNC
+CALL656 | KH286 | DNC
+CALL749 | KH286 | DNC
+
+289. Khách hàng KH287
+CUSTOMER_ID = KH287.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL288 | KH287 | DNC
+CALL310 | KH287 | OTHER
+CALL374 | KH287 | OTHER
+
+290. Khách hàng KH288
+CUSTOMER_ID = KH288.
+Khách hàng này có 4 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL289 | KH288 | OTHER
+CALL663 | KH288 | DNC
+CALL737 | KH288 | OTHER
+CALL965 | KH288 | DNC
+
+291. Khách hàng KH289
+CUSTOMER_ID = KH289.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL290 | KH289 | OTHER
+CALL496 | KH289 | OTHER
+CALL804 | KH289 | OTHER
+
+292. Khách hàng KH290
+CUSTOMER_ID = KH290.
+Khách hàng này có 5 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL291 | KH290 | OTHER
+CALL437 | KH290 | OTHER
+CALL610 | KH290 | OTHER
+CALL631 | KH290 | OTHER
+CALL806 | KH290 | OTHER
+
+293. Khách hàng KH291
+CUSTOMER_ID = KH291.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL292 | KH291 | DNC
+CALL761 | KH291 | OTHER
+CALL956 | KH291 | DNC
+
+294. Khách hàng KH292
+CUSTOMER_ID = KH292.
+Khách hàng này có 2 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL293 | KH292 | OTHER
+CALL521 | KH292 | OTHER
+
+295. Khách hàng KH293
+CUSTOMER_ID = KH293.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL294 | KH293 | DNC
+CALL820 | KH293 | OTHER
+CALL865 | KH293 | OTHER
+
+296. Khách hàng KH294
+CUSTOMER_ID = KH294.
+Khách hàng này có 3 cuộc gọi, gồm 2 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL295 | KH294 | DNC
+CALL785 | KH294 | OTHER
+CALL982 | KH294 | DNC
+
+297. Khách hàng KH295
+CUSTOMER_ID = KH295.
+Khách hàng này có 6 cuộc gọi, gồm 4 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL296 | KH295 | OTHER
+CALL364 | KH295 | DNC
+CALL396 | KH295 | DNC
+CALL529 | KH295 | OTHER
+CALL628 | KH295 | DNC
+CALL901 | KH295 | DNC
+
+298. Khách hàng KH296
+CUSTOMER_ID = KH296.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL297 | KH296 | OTHER
+CALL335 | KH296 | DNC
+CALL742 | KH296 | OTHER
+
+299. Khách hàng KH297
+CUSTOMER_ID = KH297.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL298 | KH297 | DNC
+CALL352 | KH297 | OTHER
+CALL575 | KH297 | OTHER
+
+300. Khách hàng KH298
+CUSTOMER_ID = KH298.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL299 | KH298 | OTHER
+CALL469 | KH298 | DNC
+CALL818 | KH298 | OTHER
+
+301. Khách hàng KH299
+CUSTOMER_ID = KH299.
+Khách hàng này có 3 cuộc gọi, gồm 1 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL300 | KH299 | OTHER
+CALL615 | KH299 | DNC
+CALL837 | KH299 | OTHER
+
+302. Khách hàng KH300
+CUSTOMER_ID = KH300.
+Khách hàng này có 3 cuộc gọi, gồm 0 cuộc gọi DNC.
+CALL_ID | CUSTOMER_ID | RESULT
+CALL301 | KH300 | OTHER
+CALL394 | KH300 | OTHER
+CALL719 | KH300 | OTHER
