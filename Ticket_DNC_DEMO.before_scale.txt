@@ -1,0 +1,34 @@
+TICKET VÀ ĐỊNH NGHĨA DNC — GIẢ LẬP CHO TRAINING
+Mã: TICKET-DNC-DEMO | Phiên bản: DEMO-v1
+Tất cả nội dung dưới đây là kịch bản minh họa, không phải ticket hoặc quy định chính thức của Home Credit.
+
+1. Mục tiêu của báo cáo giả lập
+Giúp người xem phân biệt số cuộc gọi DNC và số khách hàng DNC, kiểm tra sự nhất quán giữa tên card và cách tính measure.
+
+2. Định nghĩa đã chốt TRONG DEMO
+DNC_CALLS: đếm số dòng cuộc gọi có RESULT = 'DNC'.
+DNC_CUSTOMERS: đếm số CUSTOMER_ID duy nhất có ít nhất một cuộc gọi RESULT = 'DNC'.
+Một khách hàng có hai cuộc gọi DNC được tính là hai cuộc gọi nhưng chỉ một khách hàng.
+
+3. Dữ liệu minh họa
+CALL_ID | CUSTOMER_ID | RESULT
+CALL01  | KH001       | DNC
+CALL02  | KH001       | DNC
+CALL03  | KH002       | DNC
+CALL04  | KH003       | OTHER
+Kết quả kiểm tra: DNC_CALLS = 3, DNC_CUSTOMERS = 2.
+
+4. Điểm chưa thống nhất TRONG DEMO
+Card giả lập hiện ghi 'Khách hàng DNC', nhưng measure giả lập đang đếm dòng cuộc gọi.
+Business chưa xác nhận muốn giữ cách tính để đổi tên card hay đổi cách tính để đếm khách hàng.
+Không được tự kết luận một trong hai phương án đã được phê duyệt.
+Câu hỏi cần gửi business: 'Card này cần thể hiện số cuộc gọi DNC hay số khách hàng DNC duy nhất?'
+
+5. Application sau DNC
+Ticket giả lập chỉ ghi: 'Theo dõi Application phát sinh sau DNC'.
+CHƯA XÁC NHẬN: có bắt buộc cùng Ops hay không; khoảng thời gian theo dõi; cách xử lý một khách nhiều cuộc gọi hoặc nhiều Application.
+Tài liệu này không đủ để kết luận các điều kiện trên. Cần business owner xác nhận trước khi sửa SQL hoặc measure.
+
+6. Giới hạn
+Không có dữ liệu thực tế, kết nối Oracle, thông tin khách hàng, lãi suất hoặc hạn mức vay.
+Chỉ được dùng các con số trong mục 3 để giải thích ví dụ giả lập.

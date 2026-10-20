@@ -1,0 +1,23 @@
+TÀI LIỆU GIẢ LẬP CHO TRAINING RAG — KHÔNG PHẢI QUY ĐỊNH CÔNG TY
+Mã tài liệu: DNC-DEMO. Phiên bản: DEMO-v1. Trạng thái: Đang áp dụng trong demo.
+
+1. Định nghĩa
+DNC_CALLS là số dòng cuộc gọi có RESULT = 'DNC'.
+DNC_CUSTOMERS là số CUSTOMER_ID khác nhau có ít nhất một cuộc gọi RESULT = 'DNC'.
+Một khách hàng có nhiều cuộc gọi DNC vẫn chỉ tính là một DNC_CUSTOMER.
+
+2. Dữ liệu giả lập
+CALL_ID | CUSTOMER_ID | RESULT
+CALL01  | KH001       | DNC
+CALL02  | KH001       | DNC
+CALL03  | KH002       | DNC
+CALL04  | KH003       | OTHER
+
+3. Cách đối chiếu
+Lọc RESULT = 'DNC', đếm dòng cho DNC_CALLS và đếm CUSTOMER_ID duy nhất cho DNC_CUSTOMERS.
+Trong tập dữ liệu giả lập này: DNC_CALLS = 3, DNC_CUSTOMERS = 2.
+KH001 có hai cuộc gọi DNC nhưng chỉ là một khách hàng.
+
+4. Phạm vi
+Tài liệu chỉ định nghĩa hai chỉ số trên và cung cấp dữ liệu giả lập.
+Không có thông tin về lãi suất, hạn mức vay, chính sách bán hàng hay dữ liệu khách hàng thực tế.
