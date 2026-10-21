@@ -1,89 +1,132 @@
-# Demo_DNC_Fixed
+# Demo DNC RAG Local - Ollama + Qwen
 
-Dự án này là một demo Windows cho mô hình Retrieval-Augmented Generation (RAG) đơn giản, dùng dữ liệu tài liệu local (`.txt`) để tìm đoạn liên quan, ghép ngữ cảnh và tạo prompt cho Microsoft Copilot/LLM.
+Dự án này là một bản demo chạy trên Windows, minh họa mô hình Retrieval-Augmented Generation (RAG) với dữ liệu nội bộ lưu dưới dạng file `.txt`. Mục tiêu là tìm đoạn văn bản liên quan, ghép ngữ cảnh và gửi prompt cho mô hình AI local như Ollama + Qwen, giúp bạn thử nghiệm AI trên máy cá nhân mà không cần phụ thuộc hoàn toàn vào Copilot.
 
-Mục tiêu của demo là minh họa cách:
+## Mục tiêu
+
+Demo này giúp bạn hiểu và thử nghiệm các bước sau:
 
 - đọc tài liệu local bằng Python
-- chia tài liệu thành các chunk / đoạn nội dung
-- tìm kiếm thông tin dựa trên từ khóa
-- chuẩn bị prompt có ngữ cảnh cho Copilot
-- hỗ trợ kiểm tra nhanh các câu hỏi về DNC / khách hàng / cuộc gọi giả lập
+- tách nội dung thành các chunk / đoạn văn bản nhỏ
+- tìm kiếm thông tin theo từ khóa hoặc chủ đề
+- gom ngữ cảnh phù hợp để tạo prompt
+- kiểm tra nhanh các câu hỏi liên quan đến DNC, khách hàng, cuộc gọi giả lập
 
-## 1. Giới thiệu
+## Giới thiệu tổng quan
 
-Repo này chứa các script Python để:
+Repo này chứa các script Python chính như sau:
 
-- `ai_search_copilot_windows.py`: điểm vào chính, xử lý retrieval + augmentation và có thể gửi prompt lên Copilot API nếu đã cấu hình Azure app registration
-- `read_document.py`: đọc, tách chunk và rút trích nội dung liên quan
-- `generate_dnc_demo.py`: tạo dữ liệu demo DNC mẫu
-- `test_ai_search_copilot_windows.py`: kiểm thử tự động cho logic retrieval và prompt
+- `ai_search_copilot_windows.py`: điểm vào chính, thực hiện retrieval + augmentation và mặc định gọi mô hình local qua Ollama. Script cũng hỗ trợ tùy chọn `--copilot` cho trải nghiệm dùng Copilot API nếu bạn đã cấu hình quyền.
+- `read_document.py`: đọc tài liệu, tách chunk và trích xuất nội dung liên quan
+- `generate_dnc_demo.py`: tạo dữ liệu demo mẫu cho DNC
+- `test_ai_search_copilot_windows.py`: kiểm thử logic retrieval và prompt
 
-Dữ liệu demo được lưu trong:
+Các file dữ liệu demo bao gồm:
 
 - `document_dnc_demo.txt`
 - `Ticket_DNC_DEMO.txt`
 - `Tai_lieu_DNC_DEMO.txt`
 
-## 2. Yêu cầu
+## Kiến trúc demo
+
+Workflow của project như sau:
+
+1. đọc file tài liệu `.txt`
+2. chia nội dung thành các chunk
+3. tìm các đoạn phù hợp với câu hỏi
+4. tạo prompt có ngữ cảnh
+5. gửi prompt đến mô hình AI local hoặc provider khác
+6. trả lời theo ngôn ngữ tiếng Việt, dựa trên tài liệu nguồn
+
+## Yêu cầu hệ thống
 
 - Python 3.10+
 - Windows 10/11
-- Pip để cài dependencies
+- Pip để cài đặt package
 
-Cài đặt:
+Cài đặt dependency:
 
 ```powershell
 python -m pip install -r requirements_windows.txt
 ```
 
-## 3. Chạy demo cơ bản
+## Chạy demo cơ bản
+
+Ví dụ 1:
 
 ```powershell
 python .\ai_search_copilot_windows.py --question "DNC_CALLS khác DNC_CUSTOMERS thế nào?"
 ```
 
-Hoặc:
+Ví dụ 2:
 
 ```powershell
 python .\ai_search_copilot_windows.py --question "Application sau DNC có bắt buộc cùng Ops không?"
 ```
 
-Script sẽ:
+Quy trình chạy sẽ gồm:
 
-1. đọc tài liệu local
-2. tách đoạn văn bản theo mục
-3. tìm chunk phù hợp với câu hỏi
-4. tạo prompt chuẩn bị cho Copilot
-5. xuất nội dung cho bạn copy sang Copilot web hoặc gửi qua API nếu đã cấu hình quyền truy cập
+1. đọc tài liệu từ thư mục local
+2. tách nội dung thành các đoạn nhỏ
+3. tìm các chunk phù hợp với câu hỏi
+4. xây dựng prompt kèm ngữ cảnh
+5. xuất kết quả để bạn copy sang Copilot web hoặc gửi qua API nếu đã cấu hình quyền truy cập
 
-## 4. Tự động gửi lên Copilot
+## Chạy local với Ollama + Qwen
 
-Nếu bạn đã có Azure app registration và quyền phù hợp, có thể dùng chế độ Copilot API:
+Đây là cách chạy chính của project hiện tại.
+
+### Bước 1: Cài Ollama
+
+Tải và cài đặt Ollama từ trang chính thức, sau đó mở terminal và chạy:
 
 ```powershell
-python .\ai_search_copilot_windows.py --question "DNC_CALLS khác DNC_CUSTOMERS thế nào?" --copilot
+ollama pull qwen2.5:3b
 ```
 
-Chi tiết đăng nhập / quyền / token cache được mô tả trong:
+Hoặc thay model theo ý bạn nếu muốn dùng phiên bản khác.
+
+### Bước 2: Khởi động model
+
+```powershell
+ollama run qwen2.5:3b
+```
+
+### Bước 3: Chạy dự án
+
+```powershell
+python .\ai_search_copilot_windows.py --question "DNC_CALLS khác DNC_CUSTOMERS thế nào?"
+```
+
+Lúc này dự án sẽ:
+
+- đọc file tài liệu local
+- tìm đoạn liên quan
+- xây dựng prompt có context
+- gọi model local Ollama để trả lời
+
+> Nếu bạn đang dùng Copilot, hệ thống vẫn có tùy chọn `--copilot`, nhưng với workflow hiện tại, Ollama + Qwen là cách chạy chuẩn và ổn định nhất.
+
+Hướng dẫn liên quan tới đăng nhập / token / cấu hình Azure nếu cần dùng Copilot cũ vẫn có trong:
 
 - `README_LOGIN_WINDOWS.md`
 - `BAT_DAU.md`
 
-## 5. Kiểm tra nhanh
+## Kiểm tra nhanh
 
 ```powershell
 python -m unittest -v
 ```
 
-## 6. Lưu ý quan trọng
+## Lưu ý quan trọng
 
 - Đây là dữ liệu demo giả lập, không phải dữ liệu chính thức của công ty.
-- Chế độ mặc định của project là retrieval + augmentation local, còn generation được thực hiện bằng Copilot web hoặc API sau khi đã có quyền truy cập.
-- Logic tìm kiếm dựa trên từ khóa và chunk local, không phải vector database hay embedding.
-- Cần kiểm tra lại source và kết quả AI trước khi dùng cho mục đích thực tế.
+- Chế độ mặc định của project là retrieval + augmentation local.
+- Generation có thể chạy trên mô hình local qua Ollama + Qwen hoặc các provider AI khác tùy cấu hình.
+- Logic tìm kiếm hiện nay dựa trên từ khóa và chunk local, chưa dùng vector database hay embedding.
+- Luôn kiểm tra lại nguồn dữ liệu và kết quả AI trước khi dùng cho mục đích thực tế.
 
-## 7. Cấu trúc thư mục chính
+## Cấu trúc thư mục chính
 
 ```text
 Demo_DNC_Fixed/
@@ -103,16 +146,19 @@ Demo_DNC_Fixed/
 ├── test_ai_search_copilot_windows.py
 ├── Ticket_DNC_DEMO.txt
 ├── Tai_lieu_DNC_DEMO.txt
-└── TRAINING_15P.md
+├── TRAINING_15P.md
+└── ...
 ```
 
-## 8. Mục đích phát triển
+## Ứng dụng thực tế
 
-Demo này phù hợp để học cách:
+Project này phù hợp để học và demo các kỹ năng sau:
 
 - RAG trên file local
-- prompt engineering cho Copilot
+- prompt engineering cho mô hình local như Qwen qua Ollama
 - xử lý dữ liệu dạng tài liệu nội bộ
-- chuẩn bị nền tảng cho hệ thống AI Search có kiểm soát nguồn dữ liệu
+- xây dựng nền tảng AI Search có kiểm soát nguồn dữ liệu
 
-Nếu bạn muốn, mình có thể tiếp tục mở rộng project thành phiên bản có giao diện web, search nâng cao hoặc tích hợp backend API.
+## Kết luận
+
+Đây là một demo nhẹ, dễ hiểu và phù hợp để làm nền tảng cho các dự án AI Search hoặc hệ thống hỏi đáp dựa trên tài liệu nội bộ. Nếu cần, bạn có thể tiếp tục mở rộng thành phiên bản web, hệ thống search nâng cao hoặc tích hợp backend API.
