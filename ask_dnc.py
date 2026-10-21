@@ -272,29 +272,50 @@ while True:
         if not question:
             continue
 
-        # DNC_LIST_ALL_CUSTOMERS_FIX
-        import unicodedata
-
-        list_query = unicodedata.normalize("NFD", question.casefold().replace("đ", "d"))
-        list_query = "".join(c for c in list_query if unicodedata.category(c) != "Mn")
+        # CUID là tên gọi khác của CUSTOMER_ID (KH...) trong demo này.
+        list_query = normalize(question)
         if (
             re.search(r"\b(liet ke|danh sach|hien thi|xem|in)\b", list_query)
-            and re.search(r"\b(tat ca|toan bo|het)\b", list_query)
-            and re.search(r"\b(khach hang|customers?|customer_id)\b", list_query)
-            and not re.search(r"\b(dnc|other|result|kh\d+|call\d+)\b", list_query)
+            and re.search(r"\b(cuids?|khach hang|customers?|customer_id)\b", list_query)
+            and not re.search(r"\b(kh\d+|call\d+)\b", list_query)
         ):
-            customer_file = Path(__file__).resolve().with_name("document_dnc_demo.txt")
-            customer_document = customer_file.read_text(encoding="utf-8-sig")
-            customer_ids = set(re.findall(
-                r"^\s*CALL\d+\s*\|\s*(KH\d+)\s*\|\s*(?:DNC|OTHER)\s*$",
-                customer_document, re.I | re.M,
-            ))
-            customer_ids = sorted({value.upper() for value in customer_ids},
+            requested_results = set(re.findall(r"\b(dnc|other)\b", list_query))
+            limit_match = re.search(r"\b(\d+)\s+(cuids?|khach hang|customers?|customer_id)\b", list_query)
+            limit = int(limit_match[1]) if limit_match else None
+            filter_query = (
+                list_query[:limit_match.start()] + list_query[limit_match.end():]
+                if limit_match else list_query
+            )
+            if (
+                len(requested_results) > 1
+                or re.search(r"\b(khong|chua|ngoai tru|tren|duoi|it nhat|nhieu hon|it hon)\b|\d", filter_query)
+            ):
+                print("Chưa hỗ trợ điều kiện lọc này khi liệt kê CUID. Có thể liệt kê toàn bộ CUID hoặc CUID có ít nhất một cuộc gọi DNC / OTHER.")
+                continue
+            if limit is not None and limit < 1:
+                raise ValueError("Số CUID cần liệt kê phải lớn hơn 0.")
+
+            rows, _ = load_sources()
+            result_filter = next(iter(requested_results)).upper() if requested_results else None
+            selected_rows = [row for row in rows if result_filter is None or row[2] == result_filter]
+            customer_ids = sorted({row[1] for row in selected_rows},
                                   key=lambda value: (int(value[2:]), value))
-            if not customer_ids:
-                raise ValueError("Không tìm thấy dòng dữ liệu cuộc gọi trong document_dnc_demo.txt.")
-            print(f"{len(customer_ids)} khách hàng trong dữ liệu giả lập ({customer_file.name}):")
-            print("\n".join(customer_ids))
+            total_customers = len(customer_ids)
+            if limit is not None:
+                customer_ids = customer_ids[:limit]
+            scope = f"có ít nhất một cuộc gọi {result_filter}" if result_filter else "trong toàn bộ dữ liệu"
+            count_label = f"{len(customer_ids)}/{total_customers}" if limit is not None else str(total_customers)
+            order_label = "; lấy theo mã tăng dần" if limit is not None else ""
+            print(f"{count_label} CUID {scope} (giả lập; nguồn: {DATA.name}{order_label}):")
+            if re.search(r"\b(chi tiet|thong tin|call_id|result)\b", list_query):
+                print("Chi tiết gồm toàn bộ cuộc gọi của từng CUID:")
+                for customer in customer_ids:
+                    calls = [row for row in rows if row[1] == customer]
+                    dnc_count = sum(row[2] == "DNC" for row in calls)
+                    call_details = "; ".join(f"{row[0]}={row[2]}" for row in calls)
+                    print(f"{customer}: {len(calls)} cuộc gọi ({dnc_count} DNC); {call_details}")
+            elif customer_ids:
+                print("\n".join(customer_ids))
             continue
 
         prompt, sources = prepare(question)
